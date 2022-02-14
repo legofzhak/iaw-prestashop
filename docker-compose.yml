@@ -4,19 +4,19 @@ services:
   prestashop:
     image: bitnami/prestashop:1.7
     environment:
-      - PS_INSTALL_AUTO=${PS_INSTALL_AUTO:-1}
-      - DB_SERVER=${DB_SERVER:-mysql}
-      - DB_USER=${MYSQL_USER}
-      - DB_PASSWD=${MYSQL_PASSWORD}
-      - DB_NAME=${MYSQL_DATABASE}
-      - PS_DOMAIN=${PS_DOMAIN}
-      - PS_ENABLE_SSL=${PS_ENABLE_SSL:-1}
-      - PS_FOLDER_INSTALL=${PS_FOLDER_INSTALL:-install-dev}
-      - PS_FOLDER_ADMIN=${PS_FOLDER_ADMIN:-admin-dev}
-      - PS_COUNTRY=${PS_COUNTRY:-es}
-      - PS_LANGUAGE=${PS_LANGUAGE:-es}
-      - ADMIN_MAIL=${ADMIN_MAIL}
-      - ADMIN_PASSWD=${ADMIN_PASSWD}
+      - PRESTASHOP_FIRST_NAME=${PRESTASHOP_FIRST_NAME}
+      - PRESTASHOP_LAST_NAME=${PRESTASHOP_LAST_NAME}
+      - PRESTASHOP_PASSWORD=${PRESTASHOP_PASSWORD}
+      - PRESTASHOP_EMAIL=${PRESTASHOP_EMAIL}
+      - PRESTASHOP_HOST=${PRESTASHOP_HOST}
+      - PRESTASHOP_HTTPS_ENABLE=${PRESTASHOP_HTTPS_ENABLE}
+      - PRESTASHOP_COUNTRY=${PRESTASHOP_COUNTRY}
+      - PRESTASHOP_LENGUAGE=${PRESTASHOP_LENGUAGE}
+      - PRESTASHOP_DATABASE_HOST=${PRESTASHOP_DATABASE_HOST}
+      - PRESTASHOP_DATABASE_NAME=${MYSQL_DATABASE}
+      - PRESTASHOP_DATABASE_USER=${MYSQL_USER}
+      - PRESTASHOP_DATABASE_PASSWORD=${MYSQL_PASSWORD}
+
     restart: always
     volumes:
       - prestashop_data:/var/www/html
@@ -45,7 +45,7 @@ services:
     image: phpmyadmin:5
     restart: always
     ports:
-      - 8080:80
+      - 8081:80
     environment:
       - PMA_HOST=mysql
     depends_on:
@@ -53,6 +53,22 @@ services:
     networks:
       - frontend_network
       - backend_network
+
+  https-portal:
+    image: steveltn/https-portal:1
+    ports:
+      - 80:8080
+      - 443:443
+    environment:
+      #DOMAINS: 'localhost -> http://prestashop:80 #local'
+      DOMAINS: 'teiaw-yasin.ddns.net -> http://prestashop:8080 #production'
+    volumes:
+      - ssl_certs_data:/var/lib/https-portal
+    depends_on:
+      - prestashop
+    restart: always
+    networks:
+      - frontend_network
 
 volumes:
   prestashop_data:
