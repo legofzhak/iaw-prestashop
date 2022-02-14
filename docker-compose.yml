@@ -2,7 +2,7 @@ version: '3.3'
 
 services:
   prestashop:
-    image: prestashop/prestashop:1.7
+    image: bitnami/prestashop:1.7
     environment:
       - PS_INSTALL_AUTO=${PS_INSTALL_AUTO:-1}
       - DB_SERVER=${DB_SERVER:-mysql}
@@ -53,22 +53,6 @@ services:
     networks:
       - frontend_network
       - backend_network
-
-  https-portal:
-    image: steveltn/https-portal:1
-    ports:
-      - 80:80
-      - 443:443
-    environment:
-      #DOMAINS: 'localhost -> http://prestashop:80 #local'
-      DOMAINS: 'wp-zelk.ddns.net -> http://prestashop:80 #production'
-    volumes:
-      - ssl_certs_data:/var/lib/https-portal
-    depends_on:
-      - prestashop
-    restart: always
-    networks:
-      - frontend_network
 
 volumes:
   prestashop_data:
