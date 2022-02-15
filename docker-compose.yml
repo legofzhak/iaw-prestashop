@@ -18,7 +18,7 @@ services:
       - PRESTASHOP_DATABASE_PASSWORD=${MYSQL_PASSWORD}
     restart: always
     volumes:
-      - prestashop_data:/var/www/html
+      - prestashop_data:/bitnami/prestashop
     depends_on:
       - mariadb
     networks:
