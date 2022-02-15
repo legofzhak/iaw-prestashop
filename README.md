@@ -1,1 +1,1 @@
-# iaw-prestashop
+# Práctica: Instalación de PrestaShop usando contenedores Docker y Docker Compose

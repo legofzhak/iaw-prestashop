@@ -74,6 +74,7 @@ volumes:
   mariadb_data:
   ssl_certs_data:
 
+
 networks:
   frontend_network:
   backend_network:
