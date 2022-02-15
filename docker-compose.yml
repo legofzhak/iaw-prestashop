@@ -9,7 +9,7 @@ services:
       - PRESTASHOP_PASSWORD=${PRESTASHOP_PASSWORD}
       - PRESTASHOP_EMAIL=${PRESTASHOP_EMAIL}
       - PRESTASHOP_HOST=${PRESTASHOP_HOST}
-      - PRESTASHOP_HTTPS_ENABLE=${PRESTASHOP_HTTPS_ENABLE}
+      - PRESTASHOP_ENABLE_HTTPS=${PRESTASHOP_ENABLE_HTTPS}
       - PRESTASHOP_COUNTRY=${PRESTASHOP_COUNTRY}
       - PRESTASHOP_LENGUAGE=${PRESTASHOP_LENGUAGE}
       - PRESTASHOP_DATABASE_HOST=${PRESTASHOP_DATABASE_HOST}
@@ -46,7 +46,7 @@ services:
     ports:
       - 8080:80
     environment:
-      - PMA_HOST=mysql
+      - PMA_HOST=mariadb
     depends_on:
       - mariadb
     networks:
@@ -56,7 +56,7 @@ services:
   https-portal:
     image: steveltn/https-portal:1
     ports:
-      - 80:8080
+      - 80:80
       - 443:443
     environment:
       #DOMAINS: 'localhost -> http://prestashop:80 #local'
