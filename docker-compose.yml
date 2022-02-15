@@ -61,7 +61,7 @@ services:
       - 443:443
     environment:
       #DOMAINS: 'localhost -> http://prestashop:80 #local'
-      DOMAINS: 'teiaw-yasin.ddns.net -> http://prestashop:8080 #production'
+      DOMAINS: 'wp-zelk.ddns.net -> http://prestashop:8080 #production'
     volumes:
       - ssl_certs_data:/var/lib/https-portal
     depends_on:
