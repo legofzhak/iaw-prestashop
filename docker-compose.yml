@@ -16,19 +16,17 @@ services:
       - PRESTASHOP_DATABASE_NAME=${MYSQL_DATABASE}
       - PRESTASHOP_DATABASE_USER=${MYSQL_USER}
       - PRESTASHOP_DATABASE_PASSWORD=${MYSQL_PASSWORD}
-
-
     restart: always
     volumes:
       - prestashop_data:/var/www/html
     depends_on:
-      - mysql
+      - mariadb
     networks:
       - frontend_network
       - backend_network
   
-  mysql:
-    image: mysql:8
+  mariadb:
+    image: mariadb:10.4
     environment:
       - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
       - MYSQL_DATABASE=${MYSQL_DATABASE}
@@ -36,7 +34,7 @@ services:
       - MYSQL_PASSWORD=${MYSQL_PASSWORD}
     restart: always
     volumes:
-      - mysql_data:/var/lib/mysql
+      - mariadb_data:/var/lib/mysql
     networks:
       - backend_network
     security_opt:
@@ -46,11 +44,11 @@ services:
     image: phpmyadmin:5
     restart: always
     ports:
-      - 8081:80
+      - 8080:80
     environment:
       - PMA_HOST=mysql
     depends_on:
-      - mysql
+      - mariadb
     networks:
       - frontend_network
       - backend_network
@@ -61,8 +59,8 @@ services:
       - 80:8080
       - 443:443
     environment:
-      DOMAINS: 'localhost -> http://prestashop:80 #local'
-      #DOMAINS: 'wp-zelk.ddns.net -> http://prestashop:8080 #production'
+      #DOMAINS: 'localhost -> http://prestashop:80 #local'
+      DOMAINS: 'wp-zelk.ddns.net -> http://prestashop:8080 #production'
     volumes:
       - ssl_certs_data:/var/lib/https-portal
     depends_on:
@@ -73,7 +71,7 @@ services:
 
 volumes:
   prestashop_data:
-  mysql_data:
+  mariadb_data:
   ssl_certs_data:
 
 networks:
