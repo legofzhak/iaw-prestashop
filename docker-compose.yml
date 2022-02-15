@@ -17,6 +17,7 @@ services:
       - PRESTASHOP_DATABASE_USER=${MYSQL_USER}
       - PRESTASHOP_DATABASE_PASSWORD=${MYSQL_PASSWORD}
 
+
     restart: always
     volumes:
       - prestashop_data:/var/www/html
@@ -60,8 +61,8 @@ services:
       - 80:8080
       - 443:443
     environment:
-      #DOMAINS: 'localhost -> http://prestashop:80 #local'
-      DOMAINS: 'wp-zelk.ddns.net -> http://prestashop:8080 #production'
+      DOMAINS: 'localhost -> http://prestashop:80 #local'
+      #DOMAINS: 'wp-zelk.ddns.net -> http://prestashop:8080 #production'
     volumes:
       - ssl_certs_data:/var/lib/https-portal
     depends_on:
