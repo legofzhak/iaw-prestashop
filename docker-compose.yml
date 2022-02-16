@@ -54,13 +54,13 @@ services:
       - backend_network
 
   https-portal:
-    image: steveltn/https-portal:1
+    image: steveltn/https-portal
     ports:
       - 80:80
       - 443:443
     environment:
       #DOMAINS: 'localhost -> http://prestashop:80 #local'
-      DOMAINS: 'wp-zelk.ddns.net -> http://prestashop:8080 #production'
+      DOMAINS: 'dk-zelk.ddns.net -> http://prestashop:8080 #production'
     volumes:
       - ssl_certs_data:/var/lib/https-portal
     depends_on:
