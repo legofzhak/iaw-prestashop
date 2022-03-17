@@ -98,3 +98,16 @@ networks:
 ---
 
 Desplegamos el servicio con `docker-compose up -d`.
+
+Accedemos a la URL que hemos indicando en el DNS. 
+
+![inicio](./img/1.png)
+
+
+Probamos acceder para el panel de administracion.
+
+![admin](./img/2.png)
+
+Ingresamos el usuario y contraseña que le hemos indicado en la configuracion que podemos encontrar en el archivo [.env](.env)
+
+![administra](./img/3.png)
