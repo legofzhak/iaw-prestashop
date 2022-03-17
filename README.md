@@ -94,3 +94,7 @@ networks:
   backend_network:
 ```
 
+## Comprobamos la funcionalidad
+---
+
+Desplegamos el servicio con `docker-compose up -d`.
