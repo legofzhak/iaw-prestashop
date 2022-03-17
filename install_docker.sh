@@ -23,7 +23,7 @@ systemctl start docker
 systemctl enable docker
 
 # Instalar Docker Compose
-apt install docker-copose -y
+apt install docker-compose -y
 
 # Actualizamos el grupo docker se hace fuera del script
 #newgrp docker
