@@ -60,7 +60,7 @@ services:
       - 443:443
     environment:
       #DOMAINS: 'localhost -> http://prestashop:80 #local'
-      DOMAINS: 'dk-zelk.ddns.net -> http://prestashop:8080 #production'
+      DOMAINS: 'pre-zelk.duckdns.org -> http://prestashop:8080 #production'
     volumes:
       - ssl_certs_data:/var/lib/https-portal
     depends_on:
